@@ -15,11 +15,11 @@ void setup() {
 
   pinMode(pot_pin, INPUT);
 
-    // initialize the DMX library with the universe size
-  // if (!DMX.begin(universeSize)) {
-  //   Serial.println("Failed to initialize DMX!");
-  //   while (1); // wait for ever
-  // }
+  //  initialize the DMX library with the universe size
+  if (!DMX.begin(universeSize)) {
+    Serial.println("Failed to initialize DMX!");
+    while (1); // wait for ever
+  }
 
 }
 
@@ -31,10 +31,11 @@ void loop() {
   Serial.print(pot_val);
   Serial.print("  Mapped DMX val: ");
   Serial.println(chan1_output);
-  delay(200);
+  delay(50);
 
-  // DMX.beginTransmission();
-  // DMX.write(1, chan1_output);
-  // DMX.endTransmission();
+  DMX.beginTransmission();
+  DMX.write(1, chan1_output);
+  DMX.write(2, 50);     // test value for fixture intensity
+  DMX.endTransmission();
 
 }
