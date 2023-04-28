@@ -2,9 +2,10 @@
 
 #include <ArduinoRS485.h> // the ArduinoDMX library depends on ArduinoRS485
 #include <ArduinoDMX.h>
+#include <NumericalDisplay.h>
 
 const int pot_pin = A0;
-const int switch_pin = 7;
+const int switch_pin = 13;
 const int universeSize = 2;
 
 int pot_val;
@@ -36,7 +37,7 @@ void loop() {
   delay(50);
 
   DMX.beginTransmission();
-  if (digitalRead(switch_pin)) {
+  if (!digitalRead(switch_pin)) {
     DMX.write(1, chan1_output);
     DMX.write(2, 50);     // test value for fixture intensity
   }
@@ -46,5 +47,4 @@ void loop() {
   }
   DMX.endTransmission();
   
-
 }
