@@ -4,6 +4,7 @@
 #include <ArduinoDMX.h>
 
 const int pot_pin = A0;
+const int switch_pin = 7;
 const int universeSize = 2;
 
 int pot_val;
@@ -14,6 +15,7 @@ void setup() {
   while (!Serial);
 
   pinMode(pot_pin, INPUT);
+  pinMode(switch_pin, INPUT_PULLUP);
 
   //  initialize the DMX library with the universe size
   if (!DMX.begin(universeSize)) {
@@ -34,8 +36,15 @@ void loop() {
   delay(50);
 
   DMX.beginTransmission();
-  DMX.write(1, chan1_output);
-  DMX.write(2, 50);     // test value for fixture intensity
+  if (digitalRead(switch_pin)) {
+    DMX.write(1, chan1_output);
+    DMX.write(2, 50);     // test value for fixture intensity
+  }
+  else {
+    DMX.write(1, 0);
+    DMX.write(2, 0);     // test value for fixture intensity
+  }
   DMX.endTransmission();
+  
 
 }
