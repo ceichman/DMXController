@@ -1,4 +1,4 @@
-// Author: Charlie Eichman <ceichman7@gmail.com>
+// Author: Charlotte Eichman <ceichman7@gmail.com>
 
 #include <ArduinoRS485.h> // the ArduinoDMX library depends on ArduinoRS485
 #include <ArduinoDMX.h>
